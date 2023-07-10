@@ -1,6 +1,7 @@
 from controllers.menu import iniciar_menu_principal
 from datetime import datetime
 
-print(f"\n{datetime.now().strftime('%d/%m/%Y, %H:%M:%S')}\n")
 
-iniciar_menu_principal()
+if __name__ == "__main__":
+    print(f"\n{datetime.now().strftime('%d/%m/%Y, %H:%M:%S')}\n")
+    iniciar_menu_principal()
