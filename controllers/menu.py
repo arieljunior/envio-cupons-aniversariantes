@@ -31,7 +31,7 @@ def iniciar_submenu_consulta_clientes():
                 mostrar_clientes_aniversariantes()
                 break
             case '3':
-                print("CONSULTAR CLIENTES ANIVERSARIANTES DE UM MÊS ESPECÍFICO")
+                mostrar_clientes_por_mes_aniversario()
                 break
             case '4':
                 break
@@ -47,3 +47,10 @@ def mostrar_clientes_aniversariantes():
     print("\nCONSULTAR CLIENTES ANIVERSARIANTES\n")
     aniversariantes = clientes_repositorio.get_clientes_aniversariantes()
     Cliente.mostrar_clientes(aniversariantes)
+
+def mostrar_clientes_por_mes_aniversario():
+    print("\nCONSULTAR CLIENTES ANIVERSARIANTES DE UM MÊS ESPECÍFICO\n")
+    mes = int(input("Digite o número do mês (1-12): \n"))
+    aniversariantes = clientes_repositorio.get_clientes_por_mes_aniversario(mes)
+    Cliente.mostrar_clientes(aniversariantes)
+    

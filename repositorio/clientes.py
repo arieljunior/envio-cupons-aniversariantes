@@ -39,3 +39,13 @@ def get_clientes_aniversariantes() -> list[Cliente]:
     
     return aniversariantes
 
+def get_clientes_por_mes_aniversario(mes: int) -> list[Cliente]:
+    clientes = get_todos_clientes();
+    
+    aniversariantes = []
+    for cliente in clientes:
+        data_nascimento = cliente.get_data_nascimento()
+        if data_nascimento["mes"] == mes:
+            aniversariantes.append(cliente)
+    
+    return aniversariantes
