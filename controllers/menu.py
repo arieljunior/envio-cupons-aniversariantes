@@ -1,4 +1,5 @@
 import repositorio.clientes as clientes_repositorio
+from entidades.cliente import Cliente
 
 def iniciar_menu_principal():
     while True:
@@ -24,11 +25,10 @@ def iniciar_submenu_consulta_clientes():
         opcao_escolhida = input("Digite uma opção: ")
         match opcao_escolhida:
             case '1':
-                print("CONSULTAR TODOS OS CLIENTES")
                 mostrar_todos_clientes()
                 break
             case '2':
-                print("CONSULTAR CLIENTES ANIVERSARIANTES")
+                mostrar_clientes_aniversariantes()
                 break
             case '3':
                 print("CONSULTAR CLIENTES ANIVERSARIANTES DE UM MÊS ESPECÍFICO")
@@ -39,6 +39,11 @@ def iniciar_submenu_consulta_clientes():
                 print("Opção inválida")
 
 def mostrar_todos_clientes():
+    print("\nCONSULTAR TODOS OS CLIENTES\n")
     clientes = clientes_repositorio.get_todos_clientes()
-    for cliente in clientes:
-        print(f"NOME: {cliente.nome_completo}\nDATA NASCIMENTO: {cliente.data_nascimento}\nEMAIL: {cliente.email}\nDATA CRIACAO: {cliente.data_criacao}\n")
+    Cliente.mostrar_clientes(clientes)
+
+def mostrar_clientes_aniversariantes():
+    print("\nCONSULTAR CLIENTES ANIVERSARIANTES\n")
+    aniversariantes = clientes_repositorio.get_clientes_aniversariantes()
+    Cliente.mostrar_clientes(aniversariantes)

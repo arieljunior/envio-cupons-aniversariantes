@@ -1,11 +1,12 @@
 from entidades.cliente import Cliente 
 import os
 import dotenv
+from datetime import datetime
 
 dotenv.load_dotenv()
 CAMINHO_ARQUIVO_DADOS = os.getenv("CAMINHO_DADOS_ARQUIVO")
 
-def get_todos_clientes() -> list:
+def get_todos_clientes() -> list[Cliente]:
     clientes = []
     with open(CAMINHO_ARQUIVO_DADOS, 'r', encoding="utf8") as arquivo:
         linha_atual = 0
@@ -13,7 +14,7 @@ def get_todos_clientes() -> list:
             if linha_atual == 0:
                 linha_atual += 1
             else:
-                lista_valores = linha.split(",")
+                lista_valores = linha.strip().split(",")
                 cliente = Cliente(
                     nome_completo=lista_valores[0],
                     data_nascimento=lista_valores[1],
@@ -22,3 +23,19 @@ def get_todos_clientes() -> list:
                 )
                 clientes.append(cliente)
     return clientes
+
+def get_clientes_aniversariantes() -> list[Cliente]:
+    clientes = get_todos_clientes();
+
+    hoje = datetime.today()
+    dia_atual = hoje.day
+    mes_atual = hoje.month
+
+    aniversariantes = []
+    for cliente in clientes:
+        data_nascimento = cliente.get_data_nascimento()
+        if data_nascimento["dia"] == dia_atual and data_nascimento["mes"] == mes_atual:
+            aniversariantes.append(cliente)
+    
+    return aniversariantes
+
