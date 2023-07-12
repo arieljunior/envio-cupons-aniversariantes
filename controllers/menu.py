@@ -46,11 +46,20 @@ def mostrar_todos_clientes():
 def mostrar_clientes_aniversariantes():
     print("\nCONSULTAR CLIENTES ANIVERSARIANTES\n")
     aniversariantes = clientes_repositorio.get_clientes_aniversariantes()
-    Cliente.mostrar_clientes(aniversariantes)
+    if len(aniversariantes) > 0:
+        Cliente.mostrar_clientes(aniversariantes)
+    else:
+        print("Ninguém faz aniversário hoje")
 
 def mostrar_clientes_por_mes_aniversario():
     print("\nCONSULTAR CLIENTES ANIVERSARIANTES DE UM MÊS ESPECÍFICO\n")
-    mes = int(input("Digite o número do mês (1-12): \n"))
+    mes = int(input("Digite o número do mês (1-12):"))
+
     aniversariantes = clientes_repositorio.get_clientes_por_mes_aniversario(mes)
-    Cliente.mostrar_clientes(aniversariantes)
+
+    if len(aniversariantes) > 0:
+        Cliente.mostrar_clientes(aniversariantes)
+    else:
+        print("Ninguém faz aniversário neste mês")
+        
     
