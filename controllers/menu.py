@@ -1,5 +1,6 @@
 import repositorio.clientes as clientes_repositorio
 from entidades.cliente import Cliente
+from datetime import datetime
 
 def iniciar_menu_principal():
     while True:
@@ -8,10 +9,9 @@ def iniciar_menu_principal():
 
         match opcao_escolhida:
             case '1':
-                print("CONSULTAR CLIENTES")
                 iniciar_submenu_consulta_clientes()
             case '2':
-                print("CADASTRAR CLIENTE")
+                iniciar_cadastro_cliente()
             case '3':
                 print("ENVIAR CUPONS VIA EMAIL")
             case '4':
@@ -20,6 +20,7 @@ def iniciar_menu_principal():
                 print("Opção inválida")
 
 def iniciar_submenu_consulta_clientes():
+    print("\nCONSULTAR CLIENTES\n")
     while True:
         print("1 - Todos\n2 - Aniversariantes\n3 - Aniversariantes de um mês específico\n4 - Voltar para o menu principal")
         opcao_escolhida = input("Digite uma opção: ")
@@ -62,4 +63,25 @@ def mostrar_clientes_por_mes_aniversario():
     else:
         print("Ninguém faz aniversário neste mês")
         
-    
+def iniciar_cadastro_cliente():
+    print("\nCADASTRAR CLIENTE\n")
+
+    nome_completo = input("Nome completo: ")
+    data_nascimento = input("Data nascimento: ")
+    email = input("Email: ")
+    data_registro = datetime.today().strftime('%d/%m/%Y')
+
+    novo_cliente = Cliente(
+        data_criacao=data_registro,
+        data_nascimento=data_nascimento,
+        email=email,
+        nome_completo=nome_completo
+    )
+
+    foi_salvo = clientes_repositorio.salvar_cliente(novo_cliente)
+    if foi_salvo:
+        print("Cliente salvo com sucesso")
+    else:
+        print("Cliente não foi salvo")
+
+

@@ -31,7 +31,7 @@ class Cliente():
     
     @staticmethod
     def mostrar_clientes(clientes: list) -> None:
-        largura = 25
+        largura = 20
         cabecalho = tabela.montar_linha(
             ["NOME COMPLETO", "DATA NASCIMENTO", "EMAIL", "CLIENTE DESDE"], 
             eh_cabecalho=True, 

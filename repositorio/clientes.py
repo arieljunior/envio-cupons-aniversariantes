@@ -49,3 +49,12 @@ def get_clientes_por_mes_aniversario(mes: int) -> list[Cliente]:
             aniversariantes.append(cliente)
     
     return aniversariantes
+
+def salvar_cliente(cliente: Cliente) -> bool:
+    try:
+        with open(CAMINHO_ARQUIVO_DADOS, 'a') as arquivo:
+            linha = "\n" + ",".join([cliente.nome_completo, cliente.data_nascimento, cliente.email, cliente.data_criacao])
+            arquivo.write(linha)
+        return True
+    except:
+        return False
