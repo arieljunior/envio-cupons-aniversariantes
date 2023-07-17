@@ -1,0 +1,3 @@
+Olá, ${NOME}.
+Nós da ${NOME_EMPRESA} te desejamos um feliz aniversário.
+Aqui está um cupom de desconto para utilizar nas compras de nossos produtos e serviços: ${CUPOM}

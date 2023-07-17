@@ -1,6 +1,8 @@
 from calendar import isleap
 from datetime import datetime
 import utils.tabela as tabela
+from string import Template
+from utils.get_env import get_env
 
 class Cliente():
     def __init__(self, nome_completo: str, data_nascimento: str, email: str, data_criacao: str) -> None:
@@ -29,6 +31,23 @@ class Cliente():
         }
         return data
     
+    def montar_objeto_email(self):
+        primeiro_nome = self.nome_completo.split(" ")[0]
+        
+        with open(get_env("CAMINHO_TEMPLATE_EMAIL"), "r", encoding="utf8") as arquivo_template:
+            template_email = Template(arquivo_template.read())
+
+        conteudo = template_email.substitute(
+            NOME=primeiro_nome, 
+            NOME_EMPRESA=get_env("NOME_EMPRESA"),
+            CUPOM="TESTE10"
+        )
+        return {
+            "email": self.email,
+            "mensagem": conteudo,
+            "titulo_email": f"Feliz aniversário, {primeiro_nome}"
+        }
+    
     @staticmethod
     def mostrar_clientes(clientes: list) -> None:
         largura = 20
@@ -48,3 +67,4 @@ class Cliente():
             contador +=1
             if contador == len(clientes):
                 print("-" * len(linha))
+
