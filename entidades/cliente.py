@@ -31,7 +31,7 @@ class Cliente():
         }
         return data
     
-    def montar_objeto_email(self):
+    def montar_objeto_email_aniversario(self):
         primeiro_nome = self.nome_completo.split(" ")[0]
         
         with open(get_env("CAMINHO_TEMPLATE_EMAIL"), "r", encoding="utf8") as arquivo_template:
